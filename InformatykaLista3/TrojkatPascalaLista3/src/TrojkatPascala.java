@@ -1,4 +1,4 @@
-import com.sun.deploy.panel.JSmartTextArea;
+﻿import com.sun.deploy.panel.JSmartTextArea;
 
 import javax.swing.*;
 import java.awt.*;
@@ -131,6 +131,7 @@ class WierszTrojkataPascala implements ActionListener {
             //label.setBounds(710,250,1500,liczbaWierszy*30);
             secondPanel.add(label); 
            // secondPanel.setLayout(new GridLayout(liczbaWierszy, 1));
+            firstPanel.setVisible(false);
             frame.remove(firstPanel);
             frame.add(secondPanel);
 
