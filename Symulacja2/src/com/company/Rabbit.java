@@ -13,10 +13,6 @@ public class Rabbit extends Thread{
     int prevY = 0;
     MyCanvas canvas;
 
-
-    private int deltaX;
-    private int deltaY;
-
     // temp point to create point with rabbit position
     private Point tempPoint;
 
@@ -64,6 +60,7 @@ public class Rabbit extends Thread{
             currentDisatanceFromWolf = (canvas.getWolfPosition().x - prevX)*(canvas.getWolfPosition().x - prevX) + (canvas.getWolfPosition().y - prevY)*(canvas.getWolfPosition().y - prevY);
 
 
+            // sprawdzanie pol na okolo krolika i wybranie tych ktore go oddalaja od wilka
             for(int i = 0; i < 3; i++){
                 for(int j = 0; j < 3; j++){
                     int newX = i - 1;
@@ -77,72 +74,13 @@ public class Rabbit extends Thread{
                 }
             }
 
-//            // sprawdzenie czy moze uciec w prawo
-//            if((canvas.getWolfPosition().x - (prevX + 1))*(canvas.getWolfPosition().x - (prevX + 1)) + (canvas.getWolfPosition().y - prevY)*(canvas.getWolfPosition().y - prevY) > currentDisatanceFromWolf) {
-//                if(prevX + 1 < canvas.mapWidth && prevY < canvas.mapHeight){
-//                    tempPoint = new Point(prevX+1,prevY);
-//                    possibleRabbitMoves.add(tempPoint);
-//                }
-//            }
-//            // sprawdzenie czy moze uciec w lewo
-//            if((canvas.getWolfPosition().x - (prevX - 1))*(canvas.getWolfPosition().x - (prevX - 1)) + (canvas.getWolfPosition().y - prevY)*(canvas.getWolfPosition().y - prevY) > currentDisatanceFromWolf) {
-//                if(prevX - 1 >= 0 && prevY < canvas.mapHeight){
-//                    tempPoint = new Point(prevX-1,prevY);
-//                    possibleRabbitMoves.add(tempPoint);
-//                }
-//            }
-//            // sprawdzenie czy moze uciec w gore
-//            if((canvas.getWolfPosition().x - prevX)*(canvas.getWolfPosition().x - prevX) + (canvas.getWolfPosition().y - (prevY - 1))*(canvas.getWolfPosition().y - (prevY - 1)) > currentDisatanceFromWolf) {
-//                if(prevX < canvas.mapWidth && prevY - 1 >= 0){
-//                    tempPoint = new Point(prevX,prevY - 1);
-//                    possibleRabbitMoves.add(tempPoint);
-//                }
-//            }
-//            // sprawdzenie czy moze uciec w dol
-//            if((canvas.getWolfPosition().x - prevX)*(canvas.getWolfPosition().x - prevX) + (canvas.getWolfPosition().y - (prevY + 1))*(canvas.getWolfPosition().y - (prevY + 1)) > currentDisatanceFromWolf) {
-//                if(prevX < canvas.mapWidth && prevY + 1 < canvas.mapHeight){
-//                    tempPoint = new Point(prevX,prevY + 1);
-//                    possibleRabbitMoves.add(tempPoint);
-//                }
-//            }
-//            // sprawdzenie czy moze uciec w lewy gorny rog
-//            if((canvas.getWolfPosition().x - (prevX - 1))*(canvas.getWolfPosition().x - (prevX - 1)) + (canvas.getWolfPosition().y - (prevY - 1))*(canvas.getWolfPosition().y - (prevY - 1)) > currentDisatanceFromWolf) {
-//                if(prevX - 1 >= 0 && prevY - 1 >= 0){
-//                    tempPoint = new Point(prevX-1,prevY-1);
-//                    possibleRabbitMoves.add(tempPoint);
-//                }
-//            }
-//            // sprawdzenie czy moze uciec w lewy dolny rog
-//            if((canvas.getWolfPosition().x - (prevX - 1))*(canvas.getWolfPosition().x - (prevX - 1)) + (canvas.getWolfPosition().y - (prevY + 1))*(canvas.getWolfPosition().y - (prevY + 1)) > currentDisatanceFromWolf) {
-//                if(prevX - 1 >= 0 && prevY + 1 < canvas.mapHeight){
-//                    tempPoint = new Point(prevX-1,prevY+1);
-//                    possibleRabbitMoves.add(tempPoint);
-//                }
-//            }
-//            // sprawdzenie czy moze uciec w prawy gorny rog
-//            if((canvas.getWolfPosition().x - (prevX + 1))*(canvas.getWolfPosition().x - (prevX + 1)) + (canvas.getWolfPosition().y - (prevY - 1))*(canvas.getWolfPosition().y - (prevY - 1)) > currentDisatanceFromWolf) {
-//                if(prevX + 1 < canvas.mapWidth && prevY - 1 >= 0){
-//                    tempPoint = new Point(prevX+1,prevY-1);
-//                    possibleRabbitMoves.add(tempPoint);
-//                }
-//            }
-//            // sprawdzenie czy moze uciec w prawy dolny rog
-//            if((canvas.getWolfPosition().x - (prevX + 1))*(canvas.getWolfPosition().x - (prevX + 1)) + (canvas.getWolfPosition().y - (prevY + 1))*(canvas.getWolfPosition().y - (prevY + 1)) > currentDisatanceFromWolf) {
-//                if(prevX + 1 < canvas.mapWidth && prevY + 1 < canvas.mapHeight){
-//                    tempPoint = new Point(prevX+1,prevY+1);
-//                    possibleRabbitMoves.add(tempPoint);
-//                }
-//            }
-//
+
             // jesli moze sie ruszyc to wybiera ruch
             if(possibleRabbitMoves.size() > 0) {
                 // losowanie pola na ktore ruszy sie krolik
                 int i = RandomGenerator.nextInt(possibleRabbitMoves.size());
 
                 tempPoint = possibleRabbitMoves.get(i);
-
-                // jesli pole jest zajete to wybieranie innego pola
-               // while (canvas.fieldsState[tempPoint.x][tempPoint.y] != 0) tempPoint = possibleRabbitMoves.get(RandomGenerator.nextInt(possibleRabbitMoves.size()));
 
                 x = tempPoint.x;
                 y = tempPoint.y;
@@ -166,9 +104,9 @@ public class Rabbit extends Thread{
         }
     }
 
+    // funkcja zabijajaca krolika
     public void kill(){
         this.isAlive = false;
         stop();
-        System.out.println("aaa");
     }
 }

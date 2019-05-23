@@ -24,6 +24,5 @@ public class Main {
             new MyFrame(x, y, k, rabbitsAmount);
             // write your code here
 
-	// write your code here
     }
 }

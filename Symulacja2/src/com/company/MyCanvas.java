@@ -17,8 +17,10 @@ public class MyCanvas extends JPanel {
     // tablica int trzymajaca aktualny stan kazdego pola
     int[][] fieldsState;
 
+    // tworzenie obiektu wilka
     Wolf w1;
 
+    // zmienna przechowuja ilosc krolikow na starcie
     private int rabbitsAmount;
 
     // tablica typu Point z mozliwymi ruchami wilka
@@ -53,8 +55,7 @@ public class MyCanvas extends JPanel {
 
         w1.start();
 
-        //r1.start();
-       // r2.start();
+
 
     }
 
@@ -95,14 +96,11 @@ public class MyCanvas extends JPanel {
         if(isRabbit == true) fieldsState[x][y] = 1;
         else fieldsState[x][y] = 2;
 
-
-
-     //   System.out.println(fieldsState[x][y]);
-
         this.repaint();
         this.revalidate();
     }
 
+    // pobranie pozycji wilka
     public Point getWolfPosition(){
         return w1.getWolfPosition();
     }
@@ -113,6 +111,7 @@ public class MyCanvas extends JPanel {
         Point tempPoint = new Point(-1,-1);
         deltaRabbit = mapHeight*mapWidth*mapWidth*mapHeight;
 
+        // sprawdzenie pozycji wszystkich krolikow na mapie i wybranie tego najblizej wilka
         for(int i = 0; i < mapWidth; i++){
             for(int j = 0; j < mapHeight; j++){
                 if(fieldsState[i][j] == 1){
@@ -124,12 +123,13 @@ public class MyCanvas extends JPanel {
             }
 
         }
+        // jesli punkt nie ulegl zmianie( nie ma zadnego krolika na mapie) - koniec programu
         if(tempPoint.x == -1 && tempPoint.y == -1 ) System.exit(0);
-        System.out.println(tempPoint);
         return tempPoint;
     }
 
 
+    // sprawdzenie czy punkt jest na planszy
     public boolean isInBoard(int x, int y){
         if(x < 0 || x >= mapWidth || y < 0 || y >= mapHeight) return false;
         else return true;
