@@ -70,7 +70,7 @@ public class MyCanvas extends JPanel implements MouseMotionListener, MouseListen
         if(!(currentColor.equals(null))) g.setColor(currentColor);
         if(currentState.equals(Figury.DRAW.toString())) {
             if(p!=null && q!= null) {
-                if (getFigureName() == "PROSTOKĄT")
+                if (getFigureName() == "PROSTOKAT")
                     g.fillRect(Math.min(p.x, q.x), Math.min(p.y, q.y), Math.abs(q.x - p.x), Math.abs(q.y - p.y));
                 else if (getFigureName() == "ELIPSA")
                     g.fillOval(Math.min(p.x, q.x), Math.min(p.y, q.y), Math.abs(q.x - p.x), Math.abs(q.y - p.y));
@@ -133,7 +133,7 @@ public class MyCanvas extends JPanel implements MouseMotionListener, MouseListen
         if(!(currentState.equals(Figury.DRAW.toString()))) return;
         else {
             if (q == null) return;
-            if (getFigureName() == "PROSTOKĄT") {
+            if (getFigureName() == "PROSTOKAT") {
                 shape = new NamedShape(getFigureName(), new Rectangle(Math.min(p.x, q.x), Math.min(p.y, q.y), Math.abs(q.x - p.x), Math.abs(q.y - p.y)), currentColor);
                 figuryArrayList.add(shape);
             } else if (getFigureName() == "ELIPSA") {
